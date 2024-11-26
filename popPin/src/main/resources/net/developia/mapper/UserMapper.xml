@@ -7,6 +7,13 @@
         INSERT INTO USERS (username, email, enabled, nickname, password, provider, provider_id)
         VALUES (#{username}, #{email}, #{enabled}, #{nickname}, #{password}, #{provider}, null)
     </insert>
+    
+	<!-- 권한 삽입 -->
+    <insert id="insertAuthority">
+        INSERT INTO AUTHORITIES (username, authority)
+        VALUES (#{username}, #{authority})
+    </insert>
+
 
     <select id="findByEmail" resultType="net.developia.domain.UserDTO">
         SELECT * FROM USERS WHERE email = #{email}

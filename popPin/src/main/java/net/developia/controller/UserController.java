@@ -30,7 +30,7 @@ public class UserController {
 
 	@GetMapping("/register")
 	public String registerPage() {
-		return "member/register"; // JSP 경로: /WEB-INF/views/member/register.jsp
+		return "member/register"; 
 	}
 
 	@PostMapping("/register")
