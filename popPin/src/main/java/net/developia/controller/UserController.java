@@ -27,6 +27,27 @@ public class UserController {
 	public String loginPage() {
 		return "member/login";
 	}
+	// 로그인 처리
+    @PostMapping("/login")
+    public String login(
+        @RequestParam("email") String email,
+        @RequestParam("password") String password,
+        Model model
+    ) {
+        try {
+            boolean isAuthenticated = userService.authenticate(email, password);
+
+            if (isAuthenticated) {
+                return "redirect:/member/register"; // 로그인 성공 후 대시보드로 이동
+            } else {
+                model.addAttribute("error", "Invalid email or password");
+                return "member/login";
+            }
+        } catch (Exception e) {
+            model.addAttribute("error", "Login failed: " + e.getMessage());
+            return "member/login";
+        }
+    }
 
 	@GetMapping("/register")
 	public String registerPage() {

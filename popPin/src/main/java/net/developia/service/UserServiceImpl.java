@@ -36,8 +36,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean authenticate(String email, String password) {
-        UserDTO user = userMapper.findByEmail(email);
-        return user != null && passwordEncoder.matches(password, user.getPassword());
+    	UserDTO user = userMapper.findByEmail(email);
+
+        if (user != null) {
+            return passwordEncoder.matches(password, user.getPassword()); // 비밀번호 일치 확인
+        }
+        return false; // 사용자 정보가 없는 경우
     }
 
     @Override

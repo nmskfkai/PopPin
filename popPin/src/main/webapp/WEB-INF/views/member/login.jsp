@@ -49,7 +49,7 @@
 <body>
     <h1>Login Page</h1>
     <div class="form-container">
-        <form method="post" action="/login">
+        <form method="post" action="/member/login">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             
