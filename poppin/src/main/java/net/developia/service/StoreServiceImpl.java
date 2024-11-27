@@ -95,9 +95,16 @@ public class StoreServiceImpl implements StoreService{
         return storeMapper.getStoreCoordinate(storeId);  // Mapper에서 위치 정보 가져오기
     }
 
-    @Override
-    public List<PopUpStoreLocationVO> getAllStoreCoordinate() {
-        return storeMapper.getAllStoreCoordinate();   // 모든 팝업스토어 위치 정보 가져오기
-    }
+	@Override
+	public List<PopUpStoreLocationVO> getAllStoreCoordinate() {
+	    List<PopUpStoreLocationVO> locations = storeMapper.getAllStoreCoordinate();
+	    
+	    // 위치 데이터에 제목 추가
+	    for (PopUpStoreLocationVO location : locations) {
+	        PopUpStoreVO store = storeMapper.getStoreId(location.getStoreId());
+	        location.setTitle(store.getName());  // 팝업스토어의 이름을 제목으로 설정
+	    }
+	    return locations;
+	}
 
 }

@@ -15,6 +15,4 @@ public class PopUpStoreVO {
     private int views;          // 조회수
     private String createdBy;   // 작성자 ID
     private int status;         // 승인 여부 (0: 대기, 1: 승인, 2: 거절)
-    
-    
 }

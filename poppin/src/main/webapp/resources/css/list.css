@@ -233,6 +233,35 @@ h3 {
     color: white;
 }
   
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content { 
     display: block;
 }
+
+.popup-store-list {
+	width:70%;
+	margin:auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#store-list-container {
+    color: white; /* 글씨 색을 흰색으로 설정 */
+    font-size: 16px; /* 글씨 크기 설정 */
+    line-height: 1.6; /* 글씨 간격을 늘려 가독성을 높임 */
+}
+
+.store-item {
+    margin-bottom: 10px; /* 항목 간의 간격을 설정 */
+    padding: 10px;
+}
+
+.store-item-content a {
+    color: white; /* 링크 색을 흰색으로 설정 */
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    font-weight: bold; /* 글씨를 굵게 */
+}
+
+.store-item-content a:hover {
+    color: #8080ff; /* 마우스를 올렸을 때 색상 변경 */
+}
+

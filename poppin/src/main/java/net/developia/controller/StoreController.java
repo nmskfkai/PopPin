@@ -166,5 +166,7 @@ public class StoreController {
 
         return "store/mapSearch";  // JSP 뷰 반환
     }
+    
+    
 
 }

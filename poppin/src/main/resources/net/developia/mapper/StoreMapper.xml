@@ -99,10 +99,10 @@
 	    WHERE STORE_ID = #{storeId}
 	</select>
 	
-	<!-- 모든 팝업스토어 위치 정보 가져오기 -->
 	<select id="getAllStoreCoordinate" resultType="net.developia.domain.PopUpStoreLocationVO">
-	    SELECT *
-	    FROM POPUPSTORE_LOCATIONS
+	    SELECT a.STORE_ID, a.LATITUDE, a.LONGITUDE, b.NAME AS TITLE
+	    FROM POPUPSTORE_LOCATIONS a
+	    JOIN POPUPSTORES b ON a.STORE_ID = b.STORE_ID
 	</select>
 	<!-- 스토어 지도 검색 -->
 	
