@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import net.developia.domain.ImageVO;
+import net.developia.domain.PopUpStoreLocationVO;
 import net.developia.domain.PopUpStoreVO;
 import net.developia.mapper.StoreMapper;
 
@@ -48,11 +49,7 @@ public class StoreServiceImpl implements StoreService{
         return storeMapper.getPendingStores();
     }
     
-    //스토어 신청 승인/거절 처리
-    @Override
-    public void updateStoreStatus(Long storeId, int status) {
-        storeMapper.updateStoreStatus(storeId, status); // 매퍼에서 상태 업데이트 처리
-    }
+    
     
     //스토어 검색
     @Override
@@ -69,4 +66,38 @@ public class StoreServiceImpl implements StoreService{
 	public void register(PopUpStoreVO store) {
 		storeMapper.register(store);	
 	}
+	
+	//스토어 신청 승인/거절 처리
+    @Override
+    public void updateStoreStatus(Long storeId, int status) {
+        storeMapper.updateStoreStatus(storeId, status); // 매퍼에서 상태 업데이트 처리
+    }
+	
+	// 위도와 경도 추가 메서드
+    @Override
+    public void addStoreLocation(Long storeId, Double latitude, Double longitude) {
+        PopUpStoreLocationVO locationVO = new PopUpStoreLocationVO();
+        locationVO.setStoreId(storeId);
+        locationVO.setLatitude(latitude);
+        locationVO.setLongitude(longitude);
+        
+        storeMapper.addStoreLocation(locationVO); // 매퍼에 위도, 경도 추가
+    }
+	
+	//스토어 아이디로 위치 가져오기
+	@Override
+    public String getStoreLocation(Long storeId) {
+		return storeMapper.getStoreLocation(storeId);
+	}
+	
+	@Override
+    public PopUpStoreLocationVO getStoreCoordinate(Long storeId) {
+        return storeMapper.getStoreCoordinate(storeId);  // Mapper에서 위치 정보 가져오기
+    }
+
+    @Override
+    public List<PopUpStoreLocationVO> getAllStoreCoordinate() {
+        return storeMapper.getAllStoreCoordinate();   // 모든 팝업스토어 위치 정보 가져오기
+    }
+
 }

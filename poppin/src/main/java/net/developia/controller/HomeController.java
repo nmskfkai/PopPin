@@ -33,7 +33,9 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "store/list";
+		
+		
+		return "redirect:/store/list";
 	}
 	
 }

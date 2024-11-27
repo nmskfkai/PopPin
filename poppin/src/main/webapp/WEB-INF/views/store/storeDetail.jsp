@@ -34,6 +34,7 @@
 <div class="mapContainer" >
     <h2>지도 주소</h2>
     <div id="map"></div> 
+
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a11eb426bd8d22b527b68106a60722a&libraries=services,clusterer,drawing"></script>
 	
 	<script type="text/javascript">
@@ -42,14 +43,14 @@
 
     // 주소를 변수로 전달
     let address = "${store.location}";
-
+	console.log(address);
     // Kakao 지도 초기화
     let options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 초기값(임시)
         level: 3 // 지도 확대 레벨
     };
     let map = new kakao.maps.Map(container, options);
-
+	
     // 주소-좌표 변환 객체 생성
     let geocoder = new kakao.maps.services.Geocoder();
     
@@ -70,7 +71,6 @@
         }
     });
 </script>
-	</script>
 	<div><p><c:out value="${store.location}" /></p></div>
 </div>
 

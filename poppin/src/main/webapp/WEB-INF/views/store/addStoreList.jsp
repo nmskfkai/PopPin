@@ -7,12 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <title>팝업스토어 신청 목록</title>
+    <link rel="stylesheet" href="/resources/css/list.css">
 </head>
 <body>
 
 <h1>팝업스토어 신청 목록</h1>
 
-<table class="table table-striped table-bordered table-hover">
+<table class="table">
     <thead>
         <tr>
             <th>#번호</th>

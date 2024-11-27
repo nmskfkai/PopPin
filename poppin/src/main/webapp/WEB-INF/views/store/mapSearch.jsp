@@ -1,108 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/resources/css/list.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업스토어 지도</title>
+    <link rel="stylesheet" href="/resources/css/list.css">
 </head>
 <body>
-
 	<%@ include file="../includes/header.jsp"%>
-	<div class="mapContainer">
-		<div class="mapLocation"></div>
+	<div class=mapContainer>
+    <div id="map"></div> 
 	</div>
-
-	<div class="cardListContainer" onclick="">
-		<div class="cardListItem">
-			<img src="Img/maple-leaf.jpg" alt="" class="cardListImg">
-			<div class="cardContent">
-				<h3 class="cardTitle">다마고치 팝업 스토어, 성현이 파인애플 피자 좋아함</h3>
-				<p class="locationText">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                <path
-							d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-              </svg>
-					서울 관악구
-				</p>
-				<span><svg xmlns="http://www.w3.org/2000/svg" width="16"
-						height="16" fill="currentColor" class="bi bi-calendar-range"
-						viewBox="0 0 16 16">
-                <path
-							d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1M1 9h4a1 1 0 0 1 0 2H1z" />
-                <path
-							d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-              </svg>24.11.01 ~ 24.12.03</span>
-			</div>
-			<button class="likeButton listButton">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-					fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-            <path
-						d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-          </svg>
-			</button>
-		</div>
-		<div class="cardListItem">
-			<img src="Img/maple-leaf.jpg" alt="" class="cardListImg">
-			<div class="cardContent">
-				<h3 class="cardTitle">다마고치 팝업 스토어, 성현이 파인애플 피자 좋아함</h3>
-				<p class="locationText">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                <path
-							d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-              </svg>
-					서울 관악구
-				</p>
-				<span><svg xmlns="http://www.w3.org/2000/svg" width="16"
-						height="16" fill="currentColor" class="bi bi-calendar-range"
-						viewBox="0 0 16 16">
-                <path
-							d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1M1 9h4a1 1 0 0 1 0 2H1z" />
-                <path
-							d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-              </svg>24.11.01 ~ 24.12.03</span>
-			</div>
-			<button class="likeButton listButton">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-					fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-            <path
-						d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-          </svg>
-			</button>
-		</div>
-		<div class="cardListItem">
-			<img src="Img/maple-leaf.jpg" alt="" class="cardListImg">
-			<div class="cardContent">
-				<h3 class="cardTitle">다마고치 팝업 스토어, 성현이 파인애플 피자 좋아함</h3>
-				<p class="locationText">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                <path
-							d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-              </svg>
-					서울 관악구
-				</p>
-				<span><svg xmlns="http://www.w3.org/2000/svg" width="16"
-						height="16" fill="currentColor" class="bi bi-calendar-range"
-						viewBox="0 0 16 16">
-                <path
-							d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1M1 9h4a1 1 0 0 1 0 2H1z" />
-                <path
-							d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-              </svg>24.11.01 ~ 24.12.03</span>
-			</div>
-			<button class="likeButton listButton">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-					fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-            <path
-						d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-          </svg>
-			</button>
-		</div>
-	</div>
-
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a11eb426bd8d22b527b68106a60722a&libraries=services,clusterer,drawing"></script>
+	
+	<script type="text/javascript">
+        
+		// 서버에서 전달된 locations 리스트를 JavaScript 배열로 변환
+	    var locations = ${locationsJson};  // JSTL을 사용하여 Java 객체를 JSON 형식으로 변환
+		console.log(locations);
+	    function initMap() {
+	        // 지도 옵션 설정
+	        var container = document.getElementById('map'); // 지도를 표시할 DOM 요소
+	        var options = {
+	            center: new kakao.maps.LatLng(37.5665, 126.9780), // 서울시청을 기본 중심으로 설정
+	            level: 3 // 지도 확대 수준
+	        };
+	        
+	        // 지도 생성
+	        var map = new kakao.maps.Map(container, options);
+	
+	        // 위치 배열을 순회하면서 마커를 추가
+	        for (var i = 0; i < locations.length; i++) {
+	            var location = locations[i];
+	            var lat = location.latitude;
+	            var lon = location.longitude;
+	
+	            // 마커를 표시할 위치 생성
+	            var markerPosition  = new kakao.maps.LatLng(lat, lon);
+	
+	            // 마커 객체 생성
+	            var marker = new kakao.maps.Marker({
+	                position: markerPosition
+	            });
+	
+	            // 마커 지도에 표시
+	            marker.setMap(map);
+	        }
+	    }
+	
+	    // 지도 초기화
+	    window.onload = initMap;
+	</script>
 </body>
 </html>

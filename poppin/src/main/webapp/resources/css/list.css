@@ -24,8 +24,7 @@ nav {
 
 
 #searchBar {
-    transform: translate(50px);
-    width:600px;
+    width:600px; 
     height: 40px;
     border-radius: 20px;
     border: none;
@@ -76,7 +75,7 @@ nav {
 }
 
 .cardContainer {
-    width: 85%;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     justify-self: center;

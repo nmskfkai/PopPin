@@ -20,12 +20,7 @@
         WHERE STATUS = 0
     </select>
     
-    <!-- 팝업스토어 상태 업데이트 -->
-    <update id="updateStoreStatus">
-        UPDATE POPUPSTORES
-        SET status = #{status}
-        WHERE store_id = #{storeId}
-    </update>
+    
     
 	<!-- 팝업 스토어 리스트 -->
 	<select id="getList" resultType="net.developia.domain.PopUpStoreVO">
@@ -69,12 +64,48 @@
 	        AND STATUS = 1
 	    ORDER BY START_DATE DESC
 	</select>
+	
 	<!-- 각 스토어의 이미지 가져오기 -->
 	<select id="getImagesByStoreId" parameterType="Long" resultType="net.developia.domain.ImageVO">
 	    SELECT IMAGE_ID, STORE_ID, FILE_PATH
 	    FROM IMAGES
 	    WHERE STORE_ID = #{storeId}
 	</select>
-
+	
+	<!-- 팝업스토어 상태 업데이트 -->
+    <update id="updateStoreStatus">
+        UPDATE POPUPSTORES
+        SET status = #{status}
+        WHERE store_id = #{storeId}
+    </update>
+	
+	<!-- 스토어 아이디로 위치 가져오기 -->
+	<select id="getStoreLocation" parameterType="Long" resultType="String">
+		SELECT LOCATION
+		FROM POPUPSTORES
+        WHERE STORE_ID = #{storeId}
+	</select>
+	
+	<!-- 스토어 위도 경도 추가 -->
+	<insert id="addStoreLocation" parameterType="net.developia.domain.PopUpStoreLocationVO">
+	    INSERT INTO POPUPSTORE_LOCATIONS (STORE_ID, LATITUDE, LONGITUDE)
+	    VALUES (#{storeId}, #{latitude}, #{longitude})
+	</insert>
+	
+	<!-- 특정 스토어의 위치 정보 가져오기 -->
+	<select id="getStoreCoordinate" parameterType="Long" resultType="net.developia.domain.PopUpStoreLocationVO">
+	    SELECT *
+	    FROM POPUPSTORE_LOCATIONS
+	    WHERE STORE_ID = #{storeId}
+	</select>
+	
+	<!-- 모든 팝업스토어 위치 정보 가져오기 -->
+	<select id="getAllStoreCoordinate" resultType="net.developia.domain.PopUpStoreLocationVO">
+	    SELECT *
+	    FROM POPUPSTORE_LOCATIONS
+	</select>
+	<!-- 스토어 지도 검색 -->
+	
+	
 
 </mapper>
