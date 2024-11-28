@@ -123,7 +123,8 @@ public class PopupStoreController {
     @PostMapping("/popupstore/delete")
     public String deletePopupStore(@RequestParam("storeId") Long storeId, RedirectAttributes rttr) {
         try {
-        	storeservice.deletePopupStore(storeId);
+            log.info("삭제 요청 받은 storeId: " + storeId);
+            storeservice.deletePopupStore(storeId);
             rttr.addFlashAttribute("success", "성공적으로 삭제되었습니다.");
         } catch (Exception e) {
             log.error("삭제 중 오류 발생", e);
@@ -131,4 +132,5 @@ public class PopupStoreController {
         }
         return "redirect:/mypage/popupstore/manage";
     }
+
 }

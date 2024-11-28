@@ -15,22 +15,29 @@
 <main>
 
     <!-- 대기 중인 팝업 -->
-    <section class="popup-section">
-        <h2>대기 중인 팝업스토어</h2>
-        <c:forEach items="${popupStores}" var="store">
-            <div class="card">
-                <div class="card-details">
-                    <p><strong>${store.name}</strong></p>
-                    <p>위치: ${store.location}</p>
-                    <p>등록 날짜: <fmt:formatDate value="${store.startDate}" pattern="yyyy-MM-dd" /></p>
-                </div>
-                <div class="card-actions">
-                    <button onclick="location.href='/mypage/popupstore/detail?storeId=${store.storeId}'">수정</button>
-                    <button class="delete" onclick="deletePopup(${store.storeId})">삭제</button>
-                </div>
-            </div>
-        </c:forEach>
-    </section>
+	 <section class="popup-section">
+	    <h2>대기 중인 팝업스토어</h2>
+	    <c:forEach items="${popupStores}" var="store">
+	        <div class="card">
+	            <div class="card-details">
+	                <p><strong>${store.name}</strong></p>
+	                <p>위치: ${store.location}</p>
+	                <p>등록 날짜: <fmt:formatDate value="${store.startDate}" pattern="yyyy-MM-dd" /></p>
+	            </div>
+	            <div class="card-actions">
+	                <button onclick="location.href='/mypage/popupstore/detail?storeId=${store.storeId}'">수정</button>
+	                <!-- 삭제 버튼 -->
+					<div class="card-actions">
+					    <form action="/mypage/popupstore/delete" method="post" style="display:inline;">
+					        <input type="hidden" name="storeId" value="${store.storeId}">
+					        <button type="submit" class="delete" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+					    </form>
+					</div>
+
+	            </div>
+	        </div>
+	    </c:forEach>
+	</section>
 
     <!-- 승인된 팝업 -->
     <section class="popup-section">
@@ -43,8 +50,10 @@
                     <p>등록 날짜: <fmt:formatDate value="${store.startDate}" pattern="yyyy-MM-dd" /></p>
                 </div>
                 <div class="card-actions">
-                    <button onclick="location.href='/mypage/popupstore/detail?storeId=${store.storeId}'">수정</button>
-                    <button class="delete" onclick="deletePopup(${store.storeId})">삭제</button>
+                    <form action="/mypage/popupstore/delete" method="post" style="display:inline;">
+					     <input type="hidden" name="storeId" value="${store.storeId}">
+					     <button type="submit" class="delete" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+					</form>
                 </div>
             </div>
         </c:forEach>
@@ -61,8 +70,10 @@
                     <p>등록 날짜: <fmt:formatDate value="${store.startDate}" pattern="yyyy-MM-dd" /></p>
                 </div>
                 <div class="card-actions">
-                    <button onclick="location.href='/mypage/popupstore/detail?storeId=${store.storeId}'">수정</button>
-                    <button class="delete" onclick="deletePopup(${store.storeId})">삭제</button>
+					<form action="/mypage/popupstore/delete" method="post" style="display:inline;">
+					    <input type="hidden" name="storeId" value="${store.storeId}">
+				    	<button type="submit" class="delete" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+					</form>
                 </div>
             </div>
         </c:forEach>
@@ -70,11 +81,33 @@
 </main>
 
 <script>
-    function deletePopup(storeId) {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            location.href = `/mypage/popupstore/delete?storeId=${storeId}`;
-        }
+function deletePopup(storeId) {
+	console.log("storeId 값 확인:", storeId);
+    if (confirm("정말 삭제하시겠습니까?")) {
+        fetch(`/mypage/popupstore/delete`, {
+            method: 'POST',
+            
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `storeId=${store.storeId}`
+            
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('삭제가 완료되었습니다.');
+                location.reload(); // 페이지 새로고침
+            } else {
+                alert('삭제에 실패했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('삭제 중 오류:', error);
+            alert('오류가 발생했습니다.');
+        });
     }
+}
+
 </script>
 </body>
 </html>

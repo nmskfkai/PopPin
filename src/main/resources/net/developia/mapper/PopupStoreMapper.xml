@@ -52,7 +52,7 @@
     </update>
 
     <!-- 팝업스토어 삭제 -->
-    <delete id="deletePopupStore" parameterType="long">
+    <delete id="deletePopupStore" parameterType="java.lang.Long">
         DELETE FROM POPUPSTORES 
         WHERE STORE_ID = #{storeId}
     </delete>
