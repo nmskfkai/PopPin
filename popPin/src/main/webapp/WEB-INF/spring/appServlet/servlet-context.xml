@@ -24,6 +24,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="net.developia.controller" />
+	<context:component-scan base-package="net.developia.service" />
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
 	
