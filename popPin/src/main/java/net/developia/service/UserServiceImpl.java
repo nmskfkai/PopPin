@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     	// 비밀번호 암호화
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         // 활성화 상태 설정
-        userDTO.setEnabled('1');
+        userDTO.setEnabled("1");
         // Provider 설정
         userDTO.setProvider("local");
         userDTO.setProviderId(null);
