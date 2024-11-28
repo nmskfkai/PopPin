@@ -16,6 +16,9 @@
         <security:csrf disabled="true" />
         <security:intercept-url pattern="/member/login" access="permitAll" />
         <security:intercept-url pattern="/member/register" access="permitAll" />
+        <security:intercept-url pattern="/member/reset-password" access="permitAll" />
+        <security:intercept-url pattern="/member/mypage" access="permitAll" />
+        <security:intercept-url pattern="/member/edit" access="permitAll" />
         <security:intercept-url pattern="/resources/**" access="permitAll" />
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 

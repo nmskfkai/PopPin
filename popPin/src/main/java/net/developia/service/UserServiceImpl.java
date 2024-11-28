@@ -3,6 +3,8 @@ package net.developia.service;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Override
     public void register(UserDTO userDTO) {
@@ -59,10 +64,44 @@ public class UserServiceImpl implements UserService {
     public boolean resetPassword(String token, String newPassword) {
         UserDTO user = userMapper.findByResetToken(token);
         if (user != null) {
-            userMapper.updatePassword(user.getEmail(), newPassword);
+            userMapper.updatePassword(user.getEmail(), passwordEncoder.encode(newPassword));
             userMapper.updateResetToken(user.getEmail(), null); // 토큰 초기화
             return true;
         }
         return false;
     }
+    
+    @Override
+    public void sendPasswordResetEmail(String email, String resetToken) {
+        String resetUrl = "http://localhost/member/reset-password?token=" + resetToken;
+
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("Password Reset Request");
+            message.setText("Click the following link to reset your password: " + resetUrl);
+            mailSender.send(message); // 이메일 전송
+        } catch (Exception e) {
+        	System.err.println("Error while sending email: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to send email: " + e.getMessage(), e);
+        }
+    }
+    @Override
+    public UserDTO getUserByUsername(String username) {
+        return userMapper.findByUsername(username);
+    }
+
+    @Override
+    public void updateUserInfo(String username, String nickname, String email, String password) {
+        UserDTO user = new UserDTO();
+        user.setUsername(username);
+        user.setNickname(nickname);
+        user.setEmail(email);
+        user.setPassword(password); // 암호화된 비밀번호 전달
+
+        userMapper.updateUserInfo(user);
+    }
+
+    
 }

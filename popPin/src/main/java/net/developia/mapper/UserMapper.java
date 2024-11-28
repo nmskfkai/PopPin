@@ -8,10 +8,14 @@ import net.developia.domain.UserDTO;
 @Mapper
 public interface UserMapper {
     void insertUser(UserDTO userDTO);
-    UserDTO findByEmail(String email);
-    UserDTO findByResetToken(String token);
-    void updateResetToken(String email, String token);
-    void updatePassword(String email, String newPassword);
     void insertAuthority(@Param("username") String username, @Param("authority") String authority); // 권한 삽입
-
+    
+    
+    void updateResetToken(@Param("email") String email, @Param("token") String token);
+    void updatePassword(@Param("email") String email, @Param("newPassword") String newPassword);
+    UserDTO findByResetToken(@Param("token") String token);
+    UserDTO findByEmail(@Param("email") String email);
+	UserDTO findByUsername(String username);
+	void updateUserInfo(String username, String nickname, String email, String encodedPassword);
+	void updateUserInfo(UserDTO user);
 }

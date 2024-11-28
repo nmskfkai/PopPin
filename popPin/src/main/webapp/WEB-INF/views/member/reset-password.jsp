@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Forgot Password</title>
 <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,16 +44,15 @@
             background-color: #45a049;
         }
     </style>
+<title>Reset Password</title>
 </head>
 <body>
-    <h1>Forgot Password</h1>
-    <div class="form-container">
-        <form method="post" action="/member/forgot-password">
-            <label for="forgot-email">Enter your email:</label>
-            <input type="email" id="forgot-email" name="email" required>
-            
-            <button type="submit">Reset Password</button>
-        </form>
-    </div>
+<form method="post" action="/member/reset-password">
+    <input type="hidden" name="token" value="${param.token}">
+    <label for="newPassword">Enter new password:</label>
+    <input type="password" id="newPassword" name="newPassword" required>
+    <button type="submit">Reset Password</button>
+</form>
+
 </body>
 </html>
