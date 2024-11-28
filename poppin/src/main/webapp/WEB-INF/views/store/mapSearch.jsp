@@ -16,7 +16,7 @@
 
     <div id="popup-store-list" class="popup-store-list">
         <h3>현재 지도에 보이는 팝업스토어 목록</h3>
-        <div id="store-list-container"> </div> <!-- 실제 팝업스토어 리스트가 여기에 추가됩니다 -->
+        <div id="store-list-container"> <input type="hidden" name="storeId" value="${store.storeId}" /></div> <!-- 실제 팝업스토어 리스트가 여기에 추가됩니다 -->
     </div>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a11eb426bd8d22b527b68106a60722a&libraries=services,clusterer,drawing"></script>
@@ -102,7 +102,7 @@
 		             
 		             // <a> 태그 내부의 onclick을 자바스크립트로 처리하여 동적으로 값을 할당
 		             var link = document.createElement('a');
-		             link.href = '#';
+		             link.href = '/store/storeDetail';
 		             link.innerHTML = store.title;
 		             link.onclick = function() {
 		                 alert('ID: ' + store.storeId + ', 제목: ' + store.title);
